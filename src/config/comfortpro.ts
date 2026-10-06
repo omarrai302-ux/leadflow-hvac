@@ -5,7 +5,7 @@ export const comfortPro = {
   tagline: "24/7 Heating & Air Conditioning",
   phone: "(555) 123-4567",
   phoneTel: "+15551234567",
-  email: "hello@comfortpro-hvac.demo",
+  email: "service@comfortprohvac.demo",
   hours: {
     weekdays: "Mon–Fri: 7:00 AM – 7:00 PM",
     saturday: "Sat: 8:00 AM – 5:00 PM",
@@ -15,65 +15,79 @@ export const comfortPro = {
   rating: {
     stars: "★★★★★",
     score: "4.9/5",
-    label: "250+ Happy Customers",
+    label: "Sample rating for demonstration",
   },
   hero: {
-    headline: "24/7 HVAC Service You Can Count On",
+    badge: "24/7 Emergency Service · Dallas, TX",
+    headline: "HVAC Repair, Installation & Emergency Service in Dallas",
     subheadline:
-      "Fast, reliable heating and air conditioning service for homeowners throughout Dallas.",
+      "Fast AC and heating service for homeowners across Dallas and the DFW metroplex—same-day appointments when available.",
     primaryCta: "Get a Free Quote",
     secondaryCta: "Call Now",
     image:
       "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=1600&q=80",
     imageAlt: "HVAC technician servicing a residential air conditioning unit",
   },
+  trustItems: [
+    "Licensed technicians",
+    "Same-day service",
+    "Upfront pricing",
+    "24/7 emergency",
+    "DFW coverage",
+  ],
   emergency: {
     headline: "AC or heating problem right now?",
-    body: "Get same-day HVAC service from experienced technicians.",
+    body: "Request emergency HVAC service and our Dallas team will follow up quickly to get a technician scheduled.",
     cta: "Request Emergency Service",
   },
   services: [
     {
       title: "AC Repair",
       description:
-        "Restore cool air quickly with accurate diagnostics and lasting fixes—not temporary patches.",
+        "Restore cool air with thorough diagnostics and lasting repairs for Dallas summers.",
       image:
         "https://images.unsplash.com/photo-1581092918056-0c4c3faabfeb?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Technician working on HVAC equipment",
     },
     {
       title: "AC Installation",
       description:
-        "Right-sized systems installed for efficiency, quieter operation, and year-round comfort.",
+        "Right-sized central air and heat pump installs built for DFW heat and efficiency.",
       image:
         "https://images.unsplash.com/photo-1631545806609-bec83c214ab0?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Outdoor air conditioning condenser unit",
     },
     {
       title: "AC Maintenance",
       description:
-        "Seasonal tune-ups that prevent breakdowns, lower energy bills, and extend equipment life.",
+        "Seasonal tune-ups that help prevent breakdowns and keep energy costs in check.",
       image:
         "https://images.unsplash.com/photo-1504328345606-18bbc8c9d7d1?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Tools used for HVAC maintenance",
     },
     {
       title: "Heating Repair",
       description:
-        "Warm your home again with furnace and heat pump repairs from seasoned Dallas technicians.",
+        "Furnace and heat pump repairs so your home stays warm through North Texas winters.",
       image:
         "https://images.unsplash.com/photo-1621905252507-b35492cc74b4?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "HVAC professional inspecting a residential system",
     },
     {
       title: "Furnace Installation",
       description:
-        "Professional furnace replacements with clean installs, safety checks, and clear pricing.",
+        "Clean furnace replacements with safety checks and clear, upfront pricing.",
       image:
         "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Home heating and cooling ductwork",
     },
     {
       title: "Indoor Air Quality",
       description:
-        "Filters, humidifiers, and purification options that help your family breathe easier.",
+        "Filters, humidifiers, and purification options for cleaner, more comfortable air.",
       image:
         "https://images.unsplash.com/photo-1581578731548-c64695cc6952?auto=format&fit=crop&w=800&q=80",
+      imageAlt: "Clean home interior representing better indoor air quality",
     },
   ],
   whyChoose: [
@@ -91,11 +105,15 @@ export const comfortPro = {
     },
     {
       title: "24/7 emergency service",
-      description: "Nights, weekends, and holidays—we're ready when comfort can't wait.",
+      description: "Nights, weekends, and holidays—ready when comfort can't wait.",
     },
     {
       title: "Satisfaction-focused service",
       description: "We don't leave until you're comfortable and confident in the repair.",
+    },
+    {
+      title: "Local Dallas team",
+      description: "Familiar with DFW homes, weather swings, and common system issues.",
     },
   ],
   steps: [
@@ -123,36 +141,48 @@ export const comfortPro = {
   testimonials: [
     {
       quote:
-        "Our AC quit during a 100° afternoon. ComfortPro had a technician at our Plano home the same day and we were cool by evening.",
-      author: "Rachel M.",
+        "Sample review: Homeowner needed same-day AC help during peak summer heat in Plano.",
+      author: "Sample Homeowner A",
       location: "Plano, TX",
-      note: "Demo review",
+      note: "Sample review — for demonstration only",
     },
     {
       quote:
-        "Transparent quote on a furnace replacement—no pressure, no surprise fees. The install crew was respectful and thorough.",
-      author: "Daniel K.",
+        "Sample review: Clear quote and professional install communication for a furnace replacement in Dallas.",
+      author: "Sample Homeowner B",
       location: "Dallas, TX",
-      note: "Demo review",
+      note: "Sample review — for demonstration only",
     },
     {
       quote:
-        "We've used them for maintenance two summers in a row. Scheduling is easy and they always explain what they checked.",
-      author: "Sofia R.",
+        "Sample review: Routine maintenance visit described as on-time, thorough, and easy to schedule.",
+      author: "Sample Homeowner C",
       location: "Richardson, TX",
-      note: "Demo review",
+      note: "Sample review — for demonstration only",
     },
   ],
-  serviceAreas: ["Dallas", "Plano", "Irving", "Frisco", "Garland", "Richardson"],
+  serviceAreas: [
+    "Dallas",
+    "Plano",
+    "Irving",
+    "Frisco",
+    "Garland",
+    "Richardson",
+    "Arlington",
+    "Mesquite",
+    "Carrollton",
+  ],
   finalCta: {
-    headline: "Need HVAC Service Today?",
+    headline: "Need HVAC Service in Dallas Today?",
     primaryCta: "Get a Free Quote",
     secondaryCta: "Call Now",
   },
   form: {
     heading: "Request a Free Quote",
     intro:
-      "Share a few details and our Dallas team will follow up quickly to schedule service.",
+      "Tell us what you need. Our Dallas team typically follows up quickly to confirm details and schedule service.",
+    cardTitle: "Service request",
+    cardHint: "Takes about 1 minute · We’ll confirm by phone or email",
     submitLabel: "Get a Free Quote",
     successMessage:
       "Thank you. Your request was received. A ComfortPro HVAC team member will contact you shortly to confirm details.",

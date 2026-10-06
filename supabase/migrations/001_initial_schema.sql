@@ -70,7 +70,9 @@ create policy "Public can insert leads"
   on public.leads
   for insert
   to anon, authenticated
-  with check (true);
+  with check (
+    business_id in (select id from public.businesses)
+  );
 
 -- Business members can read/update their leads
 create policy "Members can select own business leads"

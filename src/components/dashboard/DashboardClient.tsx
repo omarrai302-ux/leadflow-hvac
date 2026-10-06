@@ -6,6 +6,7 @@ import { StatCard } from "@/components/dashboard/StatCard";
 import { Input, Select } from "@/components/ui/Input";
 import type { Lead, LeadStatus } from "@/types/database";
 import { LEAD_STATUSES, LEAD_STATUS_LABELS } from "@/types/database";
+import Link from "next/link";
 import { useMemo, useState } from "react";
 
 type Props = {
@@ -17,10 +18,6 @@ function greetingForHour(hour: number): string {
   if (hour < 12) return "Good morning";
   if (hour < 17) return "Good afternoon";
   return "Good evening";
-}
-
-function shortBusinessName(name: string): string {
-  return name.replace(/\s+HVAC$/i, "").trim() || name;
 }
 
 function computeStats(leads: Lead[]) {
@@ -40,7 +37,6 @@ export function DashboardClient({ initialLeads, businessName }: Props) {
 
   const stats = useMemo(() => computeStats(leads), [leads]);
   const greeting = greetingForHour(new Date().getHours());
-  const displayName = shortBusinessName(businessName);
 
   const filtered = useMemo(() => {
     const q = search.trim().toLowerCase();
@@ -66,11 +62,10 @@ export function DashboardClient({ initialLeads, businessName }: Props) {
     <div className="space-y-8">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight text-[#0a1f36] sm:text-3xl">
-          {greeting}, {displayName}{" "}
-          <span aria-hidden>👋</span>
+          {greeting}, {businessName}
         </h1>
         <p className="mt-1 text-sm text-slate-500">
-          Here&apos;s how your lead pipeline looks today.
+          Lead pipeline overview for your HVAC business.
         </p>
       </div>
 
@@ -86,13 +81,11 @@ export function DashboardClient({ initialLeads, businessName }: Props) {
       </div>
 
       <section className="space-y-4">
-        <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <h2 className="text-lg font-semibold text-[#0a1f36]">Recent Leads</h2>
-            <p className="text-sm text-slate-500">
-              {filtered.length} {filtered.length === 1 ? "lead" : "leads"} shown
-            </p>
-          </div>
+        <div>
+          <h2 className="text-lg font-semibold text-[#0a1f36]">Recent Leads</h2>
+          <p className="text-sm text-slate-500">
+            {filtered.length} {filtered.length === 1 ? "lead" : "leads"} shown
+          </p>
         </div>
 
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
@@ -122,11 +115,26 @@ export function DashboardClient({ initialLeads, businessName }: Props) {
           </div>
         </div>
 
-        <LeadsTable
-          leads={filtered}
-          selectedId={selected?.id ?? null}
-          onSelect={setSelected}
-        />
+        {leads.length === 0 ? (
+          <div className="rounded-2xl border border-dashed border-slate-200 bg-white px-6 py-14 text-center shadow-sm">
+            <p className="text-lg font-semibold text-[#0a1f36]">No leads yet</p>
+            <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-slate-500">
+              When a homeowner submits the quote form on your website, their request will appear here so you can follow up quickly.
+            </p>
+            <Link
+              href="/comfortpro#quote"
+              className="mt-6 inline-flex items-center justify-center rounded-lg bg-[#0a1f36] px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-[#14304f]"
+            >
+              Open ComfortPro quote form
+            </Link>
+          </div>
+        ) : (
+          <LeadsTable
+            leads={filtered}
+            selectedId={selected?.id ?? null}
+            onSelect={setSelected}
+          />
+        )}
       </section>
 
       {selected && (

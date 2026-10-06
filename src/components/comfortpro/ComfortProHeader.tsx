@@ -17,12 +17,14 @@ export function ComfortProHeader() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-[#14304f]/80 bg-[#0a1f36]/95 text-white backdrop-blur-md">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3.5 sm:px-6">
+      <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3 sm:px-6 sm:py-3.5">
         <Link href="/comfortpro" className="min-w-0">
           <span className="block text-base font-bold tracking-tight sm:text-lg">
             {comfortPro.name}
           </span>
-          <span className="block text-xs text-sky-200/80">{comfortPro.city}</span>
+          <span className="block text-xs text-sky-200/80">
+            {comfortPro.city} · Licensed & insured
+          </span>
         </Link>
 
         <nav className="hidden items-center gap-6 lg:flex" aria-label="Primary">
@@ -40,9 +42,9 @@ export function ComfortProHeader() {
         <div className="flex items-center gap-2 sm:gap-3">
           <a
             href={`tel:${comfortPro.phoneTel}`}
-            className="hidden text-sm font-semibold text-white md:inline"
+            className="inline-flex items-center justify-center rounded-lg border border-white/25 bg-white/10 px-3 py-2 text-sm font-semibold text-white transition hover:bg-white/15"
           >
-            {comfortPro.phone}
+            Call Now
           </a>
           <a
             href="#quote"
@@ -87,10 +89,10 @@ export function ComfortProHeader() {
                 </a>
               </li>
             ))}
-            <li>
+            <li className="pt-2">
               <a
                 href={`tel:${comfortPro.phoneTel}`}
-                className="block py-1 text-sm font-semibold text-[#ffb347]"
+                className="flex w-full items-center justify-center rounded-lg border border-white/25 bg-white/10 px-4 py-3 text-sm font-semibold text-white"
                 onClick={() => setOpen(false)}
               >
                 Call {comfortPro.phone}

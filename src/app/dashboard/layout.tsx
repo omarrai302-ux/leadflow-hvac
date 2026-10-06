@@ -37,7 +37,7 @@ export default async function DashboardLayout({
               <span className="block text-sm font-semibold text-[#0a1f36]">
                 {leadflowSite.name}
               </span>
-              <span className="block text-xs text-slate-500">Lead dashboard</span>
+              <span className="block text-xs text-slate-500">Business dashboard</span>
             </div>
           </Link>
           <div className="flex items-center gap-3 sm:gap-4">

@@ -10,7 +10,9 @@ import { useState } from "react";
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") ?? "/dashboard";
+  const raw = searchParams.get("next") ?? "/dashboard";
+  const next =
+    raw.startsWith("/") && !raw.startsWith("//") ? raw : "/dashboard";
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
