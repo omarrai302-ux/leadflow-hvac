@@ -2,6 +2,7 @@ import { DashboardClient } from "@/components/dashboard/DashboardClient";
 import { createClient } from "@/lib/supabase/server";
 import type { Lead } from "@/types/database";
 import Link from "next/link";
+import { redirect } from "next/navigation";
 
 export default async function DashboardPage() {
   const supabase = await createClient();
@@ -11,7 +12,7 @@ export default async function DashboardPage() {
   } = await supabase.auth.getUser();
 
   if (!user) {
-    return null;
+    redirect("/login?next=/dashboard");
   }
 
   const { data: membership, error: memberError } = await supabase
