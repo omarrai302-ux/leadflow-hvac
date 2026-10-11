@@ -3,8 +3,9 @@
 import { Button } from "@/components/ui/Button";
 import { Input, Select, Textarea } from "@/components/ui/Input";
 import { Spinner } from "@/components/ui/Spinner";
+import { trackGenerateLead } from "@/lib/gtag";
 import { leadFormSchema, type LeadFormInput } from "@/lib/validations/lead";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { ZodError } from "zod";
 
 type Props = {
@@ -32,6 +33,8 @@ export function LeadCaptureForm({
   const [submitting, setSubmitting] = useState(false);
   const [success, setSuccess] = useState(false);
   const [serverError, setServerError] = useState<string | null>(null);
+  /** Prevents duplicate GA events for the same saved lead id. */
+  const trackedLeadIds = useRef(new Set<string>());
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -61,11 +64,21 @@ export function LeadCaptureForm({
         body: JSON.stringify({ ...data, business_id: businessId }),
       });
 
-      const json = (await res.json()) as { error?: string };
+      const json = (await res.json()) as { error?: string; id?: string };
 
       if (!res.ok) {
         setServerError(json.error ?? "Something went wrong. Please try again.");
         return;
+      }
+
+      // Fire only after API confirms the lead was saved (no PII).
+      if (json.id) {
+        if (!trackedLeadIds.current.has(json.id)) {
+          trackedLeadIds.current.add(json.id);
+          trackGenerateLead();
+        }
+      } else {
+        trackGenerateLead();
       }
 
       setSuccess(true);
