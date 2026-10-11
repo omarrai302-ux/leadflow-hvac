@@ -64,20 +64,31 @@ export function LeadCaptureForm({
         body: JSON.stringify({ ...data, business_id: businessId }),
       });
 
-      const json = (await res.json()) as { error?: string; id?: string };
+      const json = (await res.json()) as {
+        error?: string;
+        id?: string;
+        success?: boolean;
+      };
 
       if (!res.ok) {
         setServerError(json.error ?? "Something went wrong. Please try again.");
         return;
       }
 
+      // TEMP diagnostic — remove after verifying generate_lead in production
+      console.info("[GA4 diagnostic] /api/leads success", {
+        status: res.status,
+        hasLeadId: Boolean(json.id),
+      });
+
       // Fire only after API confirms the lead was saved (no PII).
-      if (json.id) {
-        if (!trackedLeadIds.current.has(json.id)) {
-          trackedLeadIds.current.add(json.id);
-          trackGenerateLead();
-        }
+      // Deduplicate by lead id so a single successful save cannot double-fire.
+      const leadId = json.id;
+      if (leadId && trackedLeadIds.current.has(leadId)) {
+        // TEMP diagnostic — remove after verifying generate_lead in production
+        console.info("[GA4 diagnostic] skipped duplicate generate_lead for lead id");
       } else {
+        if (leadId) trackedLeadIds.current.add(leadId);
         trackGenerateLead();
       }
 
