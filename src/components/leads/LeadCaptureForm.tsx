@@ -75,19 +75,10 @@ export function LeadCaptureForm({
         return;
       }
 
-      // TEMP diagnostic — remove after verifying generate_lead in production
-      console.info("[GA4 diagnostic] /api/leads success", {
-        status: res.status,
-        hasLeadId: Boolean(json.id),
-      });
-
       // Fire only after API confirms the lead was saved (no PII).
       // Deduplicate by lead id so a single successful save cannot double-fire.
       const leadId = json.id;
-      if (leadId && trackedLeadIds.current.has(leadId)) {
-        // TEMP diagnostic — remove after verifying generate_lead in production
-        console.info("[GA4 diagnostic] skipped duplicate generate_lead for lead id");
-      } else {
+      if (!(leadId && trackedLeadIds.current.has(leadId))) {
         if (leadId) trackedLeadIds.current.add(leadId);
         trackGenerateLead();
       }
