@@ -23,10 +23,25 @@ function greetingForHour(hour: number): string {
 function computeStats(leads: Lead[]) {
   const total = leads.length;
   const newCount = leads.filter((l) => l.status === "new").length;
+  const contacted = leads.filter((l) => l.status === "contacted").length;
+  const qualified = leads.filter((l) => l.status === "qualified").length;
   const booked = leads.filter((l) => l.status === "booked").length;
+  const completed = leads.filter((l) => l.status === "completed").length;
+  const lost = leads.filter((l) => l.status === "lost").length;
+  const converted = booked + completed;
   const conversionRate =
-    total === 0 ? 0 : Math.round((booked / total) * 1000) / 10;
-  return { total, newCount, booked, conversionRate };
+    total === 0 ? 0 : Math.round((converted / total) * 1000) / 10;
+
+  return {
+    total,
+    newCount,
+    contacted,
+    qualified,
+    booked,
+    completed,
+    lost,
+    conversionRate,
+  };
 }
 
 export function DashboardClient({ initialLeads, businessName }: Props) {
@@ -72,10 +87,15 @@ export function DashboardClient({ initialLeads, businessName }: Props) {
       <div className="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
         <StatCard label="Total Leads" value={stats.total} accent="navy" />
         <StatCard label="New Leads" value={stats.newCount} accent="blue" />
-        <StatCard label="Booked" value={stats.booked} accent="green" />
+        <StatCard label="Contacted Leads" value={stats.contacted} accent="slate" />
+        <StatCard label="Qualified Leads" value={stats.qualified} accent="amber" />
+        <StatCard label="Booked Leads" value={stats.booked} accent="green" />
+        <StatCard label="Completed Leads" value={stats.completed} accent="green" />
+        <StatCard label="Lost Leads" value={stats.lost} accent="slate" />
         <StatCard
-          label="Conversion"
+          label="Conversion Rate"
           value={`${stats.conversionRate}%`}
+          sub="Booked + completed ÷ total"
           accent="amber"
         />
       </div>
